@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+<html lang="en" ng-app="PiMonitor">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta charset="utf-8">
+        <title>PiMonitor</title>
+        <meta name="generator" content="Bootply" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link href="/stylesheets/bootstrap.css" rel="stylesheet">
+        <link href="/stylesheets/style.css" rel="stylesheet">
+        
+        <!--[if lt IE 9]>
+          <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        <!-- CSS code from Bootply.com editor -->
+        
+        <style type="text/css">
+            .navbar-static-top {
+              margin-bottom:20px;
+            }
+
+            i {
+              font-size:16px;
+            }
+
+            .nav > li > a {
+              color:#787878;
+            }
+
+            footer {
+              margin-top:20px;
+              padding-top:20px;
+              padding-bottom:20px;
+              background-color:#efefef;
+            }
+
+            /* count indicator near icons */
+            .nav>li .count {
+              position: absolute;
+              bottom: 12px;
+              right: 6px;
+              font-size: 10px;
+              font-weight: normal;
+              background: rgba(51,200,51,0.55);
+              color: rgba(255,255,255,0.9);
+              line-height: 1em;
+              padding: 2px 4px;
+              -webkit-border-radius: 10px;
+              -moz-border-radius: 10px;
+              -ms-border-radius: 10px;
+              -o-border-radius: 10px;
+              border-radius: 10px;
+            }
+
+            /* indent 2nd level */
+            .list-unstyled li > ul > li {
+               margin-left:10px;
+               padding:8px;
+            }
+        </style>
+    </head>
+    
+    <!-- HTML code from Bootply.com editor -->
+    
+    <body>
+        
+        <!-- Header -->
+        <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
+          <div class="container">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#">PiMonitor</a>
+            </div>
+          </div><!-- /container -->
+        </div>
+        <!-- /Header -->
+
+<!-- Main -->
+<div class="container" ng-controller="StatCtrl">
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel panel-primary">
+              <div class="panel-heading"><h4>CPU Usage ({{statData.cpuUsage}}%)</h4></div>
+              <div class="panel-body">
+
+                <div class="progress">
+                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{statData.cpuUsage}}" aria-valuemin="0" aria-valuemax="100" style="width: {{statData.cpuUsage}}%">
+                    <span class="sr-only">{{statData.cpuUsage}}% Complete</span>
+                  </div>
+                </div>
+              </div><!--/panel-body-->
+        </div><!--/panel-->
+    </div>
+    <div class="col-md-4">
+      <div class="panel panel-primary">
+              <div class="panel-heading"><h4>Memory Usage ({{statData.memPercentUsed}}%)</h4></div>
+              <div class="panel-body">
+
+                <div class="progress">
+                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{statData.memPercentUsed}}" aria-valuemin="0" aria-valuemax="100" style="width: {{statData.memPercentUsed}}%">
+                    <span class="sr-only">{{statData.memPercentUsed}}% Complete</span>
+                  </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr><th>Total</th><th>Used</th><th>Free</th><th>Cached</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{statData.memTotal}} MB</td>
+                                <td>{{statData.memUsed}} MB</td>
+                                <td>{{statData.memFree}} MB</td>
+                                <td>{{statData.memCached}} MB</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                
+              </div><!--/panel-body-->
+          </div><!--/panel-->
+    </div>
+    <div class="col-md-4">
+          <div class="panel panel-primary">
+                  <div class="panel-heading"><h4>Temperature</h4></div>
+                  <div class="panel-body">
+                    
+                    <h2><span class="label label-primary">{{statData.tempC}}&deg;C</span></h2>
+                    <h2><span class="label label-success">{{statData.tempF}}&deg;F</span></h2>
+                  </div><!--/panel-body-->
+              </div><!--/panel-->
+    </div>
+    
+</div>
+<section class="main">
+        <h1>GPIO Controls</h1>
+        <div class="row">
+           <div class="col-md-4 col-sm-6">
+                <h2 class="text-center" style="padding-bottom: 10px">Led 1</h2>
+                <div class="switch demo3">
+                    <input type="checkbox" id="GPIOSwitch6">
+                    <label><i></i></label>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <h2 class="text-center" style="padding-bottom: 10px">Led 2</h2>
+                    <div class="switch demo3">
+                    <input type="checkbox" id="GPIOSwitch5">
+                    <label><i></i></label>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <h2 class="text-center" style="padding-bottom: 10px">Led 3</h2>
+            <div class="switch demo3">
+                <input type="checkbox" id="GPIOSwitch4">
+                <label><i></i></label>
+            </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <h2 class="text-center" style="padding-bottom: 10px">Led 4</h2>
+                <div class="switch demo3">
+                    <input type="checkbox" id="GPIOSwitch1">
+                    <label><i></i></label>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <h2 class="text-center" style="padding-bottom: 10px">Led 5</h2>
+                <div class="switch demo3">
+                    <input type="checkbox" id="GPIOSwitch2">
+                    <label><i></i></label>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </section>
+</div>
+<!-- /Main -->
+
+<footer class="text-center"><p>LPAII Domotique 2015-2016<br/> ATILANO ROSALES Ever Alejandro<br/>UTEZA Valentin </p></footer>
+
+<!--footer class="text-center">This Bootstrap 3 dashboard layout is compliments of <a href="http://www.bootply.com/85850"><strong>Bootply.com</strong></a></footer-->
+
+<!--div class="modal" id="addWidgetModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Add Widget</h4>
+      </div>
+      <div class="modal-body">
+        <p>Add a widget stuff here..</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" data-dismiss="modal" class="btn">Close</a>
+        <a href="#" class="btn btn-primary">Save changes</a>
+      </div>
+    </div>
+  </div>
+</div-->
+
+
+
+  
+        
+        <script type='text/javascript' src="/javascripts/jquery.min.js"></script>
+
+
+        <script type='text/javascript' src="/javascripts/bootstrap.js"></script>
+
+
+
+
+
+
+        
+        <!-- JavaScript jQuery code from Bootply.com editor  -->
+        
+        <script type='text/javascript'>
+        
+        $(document).ready(function() {
+        
+            $(".alert").addClass("in").fadeOut(4500);
+
+            /* swap open/close side menu icons */
+            $('[data-toggle=collapse]').click(function(){
+                // toggle icon
+                $(this).find("i").toggleClass("glyphicon-chevron-right glyphicon-chevron-down");
+            });
+
+                    });
+        </script>
+
+        <script src="/javascripts/angular.min.js"></script>
+        <script src="/javascripts/angular-resource.min.js"></script>
+        <script type="text/javascript" src="/javascripts/pimonitor.js"></script>
+        <script type="text/javascript" src="/javascripts/modernizr.custom.79639.js"></script>
+        <script src="/javascripts/socket.io-1.4.5.js"></script>
+        <script type="text/javascript">
+          var socket = io.connect('/');
+          
+          $("#GPIOSwitch6").change(function(){
+                socket.emit("GPIOSwitch6stateChanged",this.checked);  
+          });
+          
+          $("#GPIOSwitch5").change(function(){
+                socket.emit("GPIOSwitch5stateChanged",this.checked);  
+          });
+          
+          $("#GPIOSwitch4").change(function(){
+                socket.emit("GPIOSwitch4stateChanged",this.checked);  
+          });
+          
+          $("#GPIOSwitch1").change(function(){
+                socket.emit("GPIOSwitch1stateChanged",this.checked);  
+          });
+          
+          $("#GPIOSwitch2").change(function(){
+                socket.emit("GPIOSwitch2stateChanged",this.checked);  
+          });
+        </script>
+    </body>
+</html>

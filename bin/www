@@ -1,0 +1,96 @@
+#!/usr/bin/env node
+var debug = require('debug')('my-application');
+var app = require('../app');
+
+app.set('port', process.env.PORT || 3000);
+
+var server = app.listen(app.get('port'), function() {
+  debug('Express server listening on port ' + server.address().port);
+});
+
+var io = require("socket.io").listen(server);
+
+var gpio6 = require("rpi-gpio");
+var gpio5 = require("rpi-gpio");
+var gpio4 = require("rpi-gpio");
+var gpio1 = require("rpi-gpio");
+var gpio2 = require("rpi-gpio");
+
+process.on("SIGINT",function(){
+    gpio6.write(22,true,function(){
+        gpio6.destroy(function(){
+            process.exit();    
+        });
+    });
+    gpio5.write(18,true,function(){
+        gpio5.destroy(function(){
+            process.exit();    
+        });
+    });
+    gpio4.write(16,true,function(){
+        gpio4.destroy(function(){
+            process.exit();    
+        });
+    });
+    gpio1.write(12,true,function(){
+        gpio1.destroy(function(){
+            process.exit();    
+        });
+    });
+    gpio2.write(13,true,function(){
+        gpio2.destroy(function(){
+            process.exit();    
+        });
+    });
+});
+
+gpio6.setup(22,gpio6.DIR_OUT,function(){
+    gpio6.write(22,false); //turns led off
+});
+gpio5.setup(18,gpio5.DIR_OUT,function(){
+    gpio5.write(18,false); //turns led off
+});
+gpio4.setup(16,gpio4.DIR_OUT,function(){
+    gpio4.write(16,false); //turns led off
+});
+gpio1.setup(12,gpio1.DIR_OUT,function(){
+    gpio1.write(12,false); //turns led off
+});
+gpio2.setup(13,gpio2.DIR_OUT,function(){
+    gpio2.write(13,false); //turns led off
+});
+
+
+io.on("connection", function(socket){
+    console.log("Client Connected");
+    
+    socket.on("GPIOSwitch6stateChanged",function(state){
+        console.log("GPIOSwitch6 State Changed: " + state);
+        //io.emit("GPIOSwitch6UpdateState", state);
+        gpio6.write(22,state);
+    });
+    
+    socket.on("GPIOSwitch5stateChanged",function(state){
+        console.log("GPIOSwitch5 State Changed: " + state);
+        io.emit("GPIOSwitch5UpdateState", state);
+        gpio5.write(18,state);
+    });
+    
+    socket.on("GPIOSwitch4stateChanged",function(state){
+        console.log("GPIOSwitch4 State Changed: " + state);
+        io.emit("GPIOSwitch4UpdateState", state);
+        gpio4.write(16,state);
+    });
+    
+    socket.on("GPIOSwitch1stateChanged",function(state){
+        console.log("GPIOSwitch1 State Changed: " + state);
+        io.emit("GPIOSwitch1UpdateState", state);
+        gpio1.write(12,state);
+    });
+    
+    socket.on("GPIOSwitch2stateChanged",function(state){
+        console.log("GPIOSwitch2 State Changed: " + state);
+        io.emit("GPIOSwitch2UpdateState", state);
+        gpio2.write(13,state);
+    });
+});
