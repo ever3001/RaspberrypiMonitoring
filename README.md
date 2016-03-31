@@ -1,9 +1,9 @@
 # RaspberrypiMonitoring
+Original project:[sidwarkd][urlSidwark]
 
-PiMonitor is a rapidly-developed knockoff of CommandPi, an iOS app for monitoring CPU usage, memory usage, and internal temperature of your Raspberry Pi. It was created in realtime for [episode #16 of &micro;Casts][episode] and showcases how you can combine the Raspberry Pi, NodeJS, AngularJS, and Bootstrap to quickly create a project prototype.
+PiMonitoring is a rapidly-developed knockoff of CommandPi, an iOS app for monitoring CPU usage, memory usage, internal temperature and control of the GPIO of your Raspberry Pi. It was created in realtime for [episode #16 of &micro;Casts][episode] and [episode #17 of &micro;Casts][episode2] and showcases how you can combine the Raspberry Pi, NodeJS, AngularJS, Socket IO, RPI-GPIO and Bootstrap to quickly create a project prototype.
 
 ## How to Use It
-You can watch the [&micro;Cast episode][episode] to see the program developed but if you just want to grab the source code and start messing around you can clone this repository right on the Raspberry Pi.
 
 Once the repo is present you need to ensure you have NodeJS installed. You can test this by running:
 
@@ -25,21 +25,14 @@ This can take several minutes on the Pi depending on connection speed. Once fini
 node bin/www
 ```
 
-### Following Along
-If you wish to follow along in the video and create the project from scratch you will need one additional dependency and that's the ExpressJS generator which can be installed from the command line (after NodeJS and NPM are installed) with:
-
-```bash
-sudo npm install -g express-generator
-```
-
 ## Adding Features
-If you want to enhance your monitor to report on more items like disk space or even external sensors you have a couple of options.
+If you want to enhance your monitor to report on more items like disk space or add more controls of GPIO or even external sensors you have a couple of options.
 
 1. Add additional return data to the **update** function in pinode_stats.js
 2. Create a new route in Express following the same pattern as the /stats route and call that route from the AngularJS code
+3. Edit the file www which includes the conection and control of the GPIO
 
-## Questions
-If you have any questions or get stuck I'm happy to help. My current contact information can be found in [my profile][profile].
 
 [episode]: http://blog.microcasts.tv/2014/04/14/pi_express_bootstrap_angular/
-[profile]: https://github.com/sidwarkd
+[urlSidwark]: https://github.com/sidwarkd/pimonitor
+[episode2]:http://www.microcasts.tv/episodes/2014/06/21/using-socket-io-to-control-the-raspberry-pi-remotely/
