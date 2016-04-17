@@ -1,5 +1,6 @@
 # RaspberrypiMonitoring
 Original project:[sidwarkd][urlSidwark]
+
 Youtube video: https://youtu.be/-oWhPa0slRM
 
 PiMonitoring is a rapidly-developed knockoff of CommandPi, an iOS app for monitoring CPU usage, memory usage, internal temperature and control of the GPIO of your Raspberry Pi. It was created in realtime for [episode #16 of &micro;Casts][episode] and [episode #17 of &micro;Casts][episode2] and showcases how you can combine the Raspberry Pi, NodeJS, AngularJS, Socket IO, RPI-GPIO and Bootstrap to quickly create a project prototype.
