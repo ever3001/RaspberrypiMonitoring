@@ -36,6 +36,17 @@ If you want to enhance your monitor to report on more items like disk space or a
 ## Raspberry Pi Image
 If you want to download the raspberry pi image where is all the configuration and the program, you can download in the next link: [imagePi]
 
+
+## Raspberry Pi in server PHP
+If you want to test the control of a Raspberry Pi in a PHP server, you should download the zip file and put the files inside of your Raspberry Pi Server (/var/www) . If you don't have it, you can install it with the command:
+
+```bash
+sudo apt-get install apache2 -y
+```
+
+For more information about how install the server: https://www.raspberrypi.org/documentation/remote-access/web-server/apache.md
+
+
 [episode]: http://blog.microcasts.tv/2014/04/14/pi_express_bootstrap_angular/
 [urlSidwark]: https://github.com/sidwarkd/pimonitor
 [episode2]:http://www.microcasts.tv/episodes/2014/06/21/using-socket-io-to-control-the-raspberry-pi-remotely/
