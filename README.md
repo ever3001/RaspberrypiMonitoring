@@ -33,6 +33,10 @@ If you want to enhance your monitor to report on more items like disk space or a
 3. Edit the file www which includes the conection and control of the GPIO
 
 
+## Raspberry Pi Image
+If you want to download the raspberry pi image where is all the configuration and the program, you can download in the next link: [imagePi]
+
 [episode]: http://blog.microcasts.tv/2014/04/14/pi_express_bootstrap_angular/
 [urlSidwark]: https://github.com/sidwarkd/pimonitor
 [episode2]:http://www.microcasts.tv/episodes/2014/06/21/using-socket-io-to-control-the-raspberry-pi-remotely/
+[imagePi]:https://mega.nz/#!hU0AzDQT!ds_ebK0bc7-4QEJ_lJLn2an6tg2Nw2tXPcvalo9GG4g 
